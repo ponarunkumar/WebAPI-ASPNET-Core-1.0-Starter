@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using dotnet_core_web_api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_core_web_api.Controllers
 {
@@ -40,5 +42,14 @@ namespace dotnet_core_web_api.Controllers
         public void Delete(int id)
         {
         }
+    }
+
+    public class ActionDbContext: DbContext
+    {
+        public DbSet<ActionItem> ActionItems {get; set;}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+ {
+ optionsBuilder.UseSqlite("Filename=./Actions.db");
+ }
     }
 }
